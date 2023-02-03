@@ -7,9 +7,9 @@ namespace WebApi.Repositories.Impl
     {
         private List<T> _entities = new List<T>();
 
-        public void Add(T model)
+        public void Add(T entity)
         {
-            _entities.Add(model);
+            _entities.Add(entity);
         }
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface IBaseRepository<T>
     {
-        void Add(T model);
+        void Add(T entity);
     }
 }
