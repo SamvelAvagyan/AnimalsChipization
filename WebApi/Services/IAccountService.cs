@@ -3,6 +3,6 @@ using WebApi.Repositories;
 
 namespace WebApi.Services
 {
-    public interface IAccountServie : IBaseService<Account>
+    public interface IAccountService : IBaseService<Account>
     { }
 }
