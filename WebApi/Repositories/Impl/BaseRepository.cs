@@ -1,15 +1,22 @@
-﻿using WebApi.Models;
+﻿using WebApi.Data;
+using WebApi.Models;
 
 namespace WebApi.Repositories.Impl
 {
     public class BaseRepository<T> : IBaseRepository<T>
         where T : BaseModel
     {
-        private List<T> _entities = new List<T>();
+        private readonly AnimalsChipizationDbContext _dbContext;
+
+        public BaseRepository(AnimalsChipizationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
 
         public void Add(T entity)
         {
-            _entities.Add(entity);
+            _dbContext.Set<T>().Add(entity);
+            _dbContext.SaveChanges();
         }
     }
 }
