@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebApi.Data;
+using WebApi.Mappings;
 using WebApi.Repositories;
 using WebApi.Repositories.Impl;
 using WebApi.Services;
@@ -18,6 +19,8 @@ builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddDbContext<AnimalsChipizationDbContext>(con => con.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddAutoMapper(typeof(AccountProfile));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

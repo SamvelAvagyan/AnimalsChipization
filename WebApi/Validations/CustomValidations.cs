@@ -1,6 +1,7 @@
 ﻿using FluentValidation.Validators;
 using FluentValidation;
 using System.Net.Mail;
+using System.Text.RegularExpressions;
 
 namespace WebApi.Validations
 {
@@ -8,7 +9,7 @@ namespace WebApi.Validations
     {
         public static IRuleBuilderOptions<T, string> MatchEmailRules<T>(this IRuleBuilder<T, string> ruleBuilder)
         {
-            return ruleBuilder.SetValidator(new RegularExpressionValidator<T>(@"^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"));
+            return ruleBuilder.SetValidator(new RegularExpressionValidator<T>(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.IgnoreCase));
         }
     }
 }

@@ -13,6 +13,11 @@ namespace WebApi.Services.Impl
             _baseRepository = baseRepository;
         }
 
+        public IQueryable<T> GetAll()
+        {
+            return _baseRepository.GetAll();
+        }
+
         public void Add(T entity)
         {
             _baseRepository.Add(entity);

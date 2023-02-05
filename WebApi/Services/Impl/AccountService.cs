@@ -5,8 +5,17 @@ namespace WebApi.Services.Impl
 {
     public class AccountService : BaseService<Account>, IAccountService
     {
-        public AccountService(IBaseRepository<Account> baseRepository) 
+        private readonly IAccountRepository _accountRepository;
+
+        public AccountService(IBaseRepository<Account> baseRepository, IAccountRepository accountRepository)
             : base(baseRepository)
-        { }
+        {
+            _accountRepository = accountRepository;
+        }
+
+        public Account GetByEmail(string email)
+        {
+            return _accountRepository.GetAll().Where(account => account.Email == email).FirstOrDefault();
+        }
     }
 }

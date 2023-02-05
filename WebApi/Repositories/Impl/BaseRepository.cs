@@ -1,4 +1,5 @@
-﻿using WebApi.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using WebApi.Data;
 using WebApi.Models;
 
 namespace WebApi.Repositories.Impl
@@ -11,6 +12,11 @@ namespace WebApi.Repositories.Impl
         public BaseRepository(AnimalsChipizationDbContext dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        public IQueryable<T> GetAll()
+        {
+            return _dbContext.Set<T>();
         }
 
         public void Add(T entity)
