@@ -22,5 +22,10 @@ namespace WebApi.Services.Impl
         {
             _baseRepository.Add(entity);
         }
+
+        public T GetById(int? id)
+        {
+            return _baseRepository.GetAll().FirstOrDefault(e => e.Id == id);
+        }
     }
 }

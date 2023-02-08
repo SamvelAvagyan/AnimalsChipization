@@ -9,6 +9,7 @@ namespace WebApi.Mappings
         public AccountProfile()
         {
             CreateMap<AccountRegistrationViewModel, Account>();
+            CreateMap<Account, AccountGetViewModel>();
         }
     }
 }

@@ -2,6 +2,8 @@
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Threading.Tasks;
 using WebApi.Models;
 using WebApi.Services;
 using WebApi.Validations;
@@ -9,7 +11,6 @@ using WebApi.ViewModels;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class AccountController : ControllerBase
     {
@@ -43,7 +44,28 @@ namespace WebApi.Controllers
 
             Account account = _mapper.Map<Account>(accountViewModel);
             _accountService.Add(account);
-            return StatusCode(201);
+            AccountGetViewModel accountGetViewModel = _mapper.Map<AccountGetViewModel>(_accountService.GetByEmail(account.Email));
+            return Created("registration", accountGetViewModel);
+        }
+
+        [HttpGet("accounts/{accountId}")]
+        public IActionResult GetById(int? accountId)
+        {
+            if(accountId == null || accountId < 0)
+            {
+                return StatusCode(400);
+            }
+
+            Account account = _accountService.GetById(accountId);
+            if (account == null)
+            {
+                return StatusCode(404);
+            }
+
+            //Неверные авторизационные данные - 401
+
+            AccountGetViewModel accountViewModel = _mapper.Map<AccountGetViewModel>(account);
+            return StatusCode(200, accountViewModel);
         }
     }
 }

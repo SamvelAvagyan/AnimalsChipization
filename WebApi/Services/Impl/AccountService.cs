@@ -15,7 +15,7 @@ namespace WebApi.Services.Impl
 
         public Account GetByEmail(string email)
         {
-            return _accountRepository.GetAll().Where(account => account.Email == email).FirstOrDefault();
+            return _accountRepository.GetAll().FirstOrDefault(account => account.Email == email);
         }
     }
 }

@@ -4,5 +4,6 @@
     {
         IQueryable<T> GetAll();
         void Add(T entity);
+        T GetById(int? id);
     }
 }
