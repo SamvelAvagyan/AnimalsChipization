@@ -67,5 +67,19 @@ namespace WebApi.Controllers
             AccountGetViewModel accountViewModel = _mapper.Map<AccountGetViewModel>(account);
             return StatusCode(200, accountViewModel);
         }
+
+        // Not finished
+        [HttpGet("accounts/search")]
+        public IActionResult Search(string? firstName, string? lastName, string? email, int from = 0, int size = 10)
+        {
+            List<Account> accounts = _accountService.Search(firstName, lastName, email, from, size).ToList();
+            List<AccountGetViewModel> accountViewModels = new List<AccountGetViewModel>();
+            foreach(var account in accounts)
+            {
+                accountViewModels.Add(_mapper.Map<AccountGetViewModel>(account));
+            }
+
+            return StatusCode(200, accountViewModels);
+        }
     }
 }
